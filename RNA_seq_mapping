@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH --job-name=RNAseq_analysis_227.2		                        # Job name
+#SBATCH --partition=batch		                            # Partition (queue) name
+#SBATCH --ntasks=1			                                # Single task job- match this to the num_threads used by BLAST
+#SBATCH --mem=36gb			                                # Total memory for job
+#SBATCH --cpus-per-task=6
+#SBATCH --time=4:00:00  		                            # Time limit hrs:min:sec
+#SBATCH --output=/work/djglab/jah71605/log_files/log.%j			    # Standard output and error log -
+#SBATCH --mail-user=jah71605@uga.edu                    # Where to send mail -
+#SBATCH --mail-type=END,FAIL                            # Mail events (BEGIN, END, FAIL, ALL)
+
+run_dir="/scratch/jah71605/rna/ggbc_RNA_seq"
+
+mkdir -p $run_dir
+# rm -rf $run_dir/*
+
+data_dir=$run_dir/data
+out_dir=$run_dir/out
+out_aug_dir=$run_dir/out_aug
+mkdir -p $data_dir $out_dir $out_aug_dir
+
+source activate rna_seq
